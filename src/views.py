@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 
-from src import app, db
+from src import app
+from src.settings import db
 from src.database.models import User
-
 
 
 @app.route('/home')
@@ -20,6 +20,8 @@ def ServerWorking():
 @app.route('/users', methods = ['GET'])
 def UsersGet():
     user_data = User.query.all()
+    if not user_data:
+        return jsonify({"message": "Data Not Found", "success": False})
     data = []
     for i in user_data:
         result = {

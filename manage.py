@@ -1,11 +1,9 @@
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
-from src import app, db
-from src.settings import config
+from src import app
+from src.settings import db, DEBUG
 
-
-DEBUG = config["DEBUG"]
 
 manager = Manager(app)
 migrate = Migrate(app, db)
